@@ -5,16 +5,18 @@ import { navigate } from "gatsby";
 import theme from "utils/theme";
 import styled from "styled-components";
 
-// Containers
-import TopBar from "../TopBar";
-
 // Components
 import Keyboard from "components/keyboard";
 import Grid from "components/grid";
 import Popup from "components/popup";
 
+
+// Containers
+import TopBar from "../TopBar";
+
 // Words
-import words from 'utils/words.json'
+import playableWords from 'utils/playableWords.json'
+import tryableWords from 'utils/tryableWords.json'
 
 const Container = styled.div`
   width: 100vw;
@@ -39,13 +41,10 @@ const Solo = () => {
   const chance = 6;
 
   const getWord = () => {
-    // there is an exemple of the words.json file 
-    // {"M": "abyssal", "no": "2", "CONT": "mesure adj", "DOM": {"code": "QUAt", "nom": "quantité, quantitatif", "niveau-de-langue": "litteraire"}, "OP": "st", "SENS": "très grd,insondable", "OP1": "cn", "CA": {"code": "A-", "categorie": "A", "type": "animal", "genre": "MF"}, "ID": 1412, "LVF": false}
-    const randomLine = words[Math.floor(Math.random() * words.length)]
-    const tempWord = randomLine.M
-    if ((tempWord?.length === 5 || tempWord?.length === 6) && tempWord.match(/^[a-zA-Z]+$/)) {
-      setWord("abysal")
-      setLetterNb(6)
+    const randomLine = playableWords[Math.floor(Math.random() * playableWords.length)]
+    if ((randomLine?.length === 5 || randomLine?.length === 6) && randomLine.match(/^[a-zA-Z]+$/)) {
+      setWord(randomLine)
+      setLetterNb(randomLine.length)
     } else {
       getWord()
     }
@@ -74,7 +73,7 @@ const Solo = () => {
         setValue("")
         setNotFound(false)
       } if (letter.length === letterNb && value === "Enter" || value === "Entrée") {
-        if (words.find((word) => word.M === letter)) {
+        if (tryableWords.includes(letter)) {
           verify()
         } else {
           setNotFound(true)
@@ -110,7 +109,6 @@ const Solo = () => {
         rowResult.push({ color: "r", letter: letter[i] })
       }
     }
-    console.log('rowResult', rowResult)
     setResult({ ...result, [tryNb]: {result: rowResult, letter} })
     setLetter("")
     if (chance > tryNb) {

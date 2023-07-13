@@ -11,7 +11,7 @@ import Icon from "utils/icon";
 const Container = styled.div`
   background-color: transparent;
   height: 10vh;
-  width: 100vw;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -22,7 +22,6 @@ const Container = styled.div`
 `;
 
 const TitleDiv = styled.div`
-  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -30,18 +29,30 @@ const TitleDiv = styled.div`
 `;
 
 const UserDiv = styled.div`
-  width: 20%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: row;
   right: 0;
-  position: absolute;
+  width: 20%;
 `;
 
-const TopBar = () => {
+const IconDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  width: 20%;
+`;
+
+const TopBar = ({menu}) => {
   return (
     <Container>
+      <IconDiv>
+        {!menu &&
+          <Icon icon="Back" onClick={() => navigate('/')} size="2x" style={{cursor: "pointer"}}/>
+        }
+      </IconDiv>
       <TitleDiv>
         <h1>Wordle Battle</h1>
       </TitleDiv>

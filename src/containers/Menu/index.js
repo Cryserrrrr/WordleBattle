@@ -26,14 +26,27 @@ const MenuDiv = styled.div`
   flex-direction: Column;
 `;
 
+const Button = styled.div`
+  width: 300px;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid white;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  font-size: 20px;
+`;
+
 const Menu = () => {
   return (
     <Container>
-      <TopBar />
+      <TopBar menu={true}/>
       <MenuDiv>
-        <h1 onClick={() => navigate('/solo')}>Solo</h1>
-        <h1>Multiplayer</h1>
-        <h1>Settings</h1>
+        <Button onClick={() => navigate('/solo')}>Solo</Button>
+        <Button>Multiplayer</Button>
+        <Button>Settings</Button>
       </MenuDiv>
     </Container>
   );
