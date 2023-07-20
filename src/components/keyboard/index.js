@@ -52,13 +52,17 @@ const Keyboard = ({setValue, result}) => {
     let tempsAllResult = {}
     for (let i = 0; i < Object.keys(result).length; i++) {
       for (let index = 0; index < result[i].letter.length; index++) {
-        tempsAllResult = { ...tempsAllResult, [result[i].letter[index]]: result[i].result[index].color}
+        if (result[i].result[index].color !== "r") {
+          tempsAllResult = { ...tempsAllResult, [result[i].letter[index]]: result[i].result[index].color}
+        } else if (result[i].result[index].color === "r" && !tempsAllResult[result[i].letter[index]]) {
+          tempsAllResult = { ...tempsAllResult, [result[i].letter[index]]: result[i].result[index].color}
+        }
       }
     }
     setAllResult(tempsAllResult)
   }, [result])
 
-
+  console.log(allResult)
 
   const displayLetter = (row) => {
     return (

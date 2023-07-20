@@ -6,7 +6,7 @@ import styled from "styled-components";
 
 const Container = styled.div`
   width: 100%;
-  height: 55%;
+  height: ${props => props.chance * 80}px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -51,7 +51,7 @@ const Grid = ({ letterNb, tryNb, letter, chance, word, result }) => {
   }
 
   return (
-    <Container>
+    <Container chance={chance}>
       {Array.from(Array(chance), (e, index) => {
         return (
           <Row key={index} letterNb={letterNb} chance={chance}>

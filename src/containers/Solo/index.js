@@ -72,8 +72,8 @@ const Solo = () => {
         setLetter(letter.slice(0, -1))
         setValue("")
         setNotFound(false)
-      } if (letter.length === letterNb && value === "Enter" || value === "Entrée") {
-        if (tryableWords.includes(letter)) {
+      } if (letter.length === letterNb && (value === "Enter" || value === "Entrée")) {
+        if (tryableWords.find((word) => word === letter)) {
           verify()
         } else {
           setNotFound(true)
@@ -84,7 +84,11 @@ const Solo = () => {
 
   useEffect(() => {
     if (tryNb === chance) {
-      loose()
+      if (letter === word) {
+        win()
+      } else {
+        loose()
+      }
     }
   }, [tryNb])
 
